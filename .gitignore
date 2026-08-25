@@ -1,0 +1,85 @@
+# ============================================================
+# feilian-cli .gitignore
+# 参考：github.com/github/gitignore/tree/main/Python.gitignore
+# ============================================================
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.manifest
+*.spec
+build/
+dist/
+*.egg-info/
+src/*.egg-info/
+*.egg
+PKG-INFO
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+pip-wheel-metadata/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.pytype/
+.hypothesis/
+*.log
+
+# ---------- 虚拟环境 ----------
+.venv/
+venv/
+ENV/
+env/
+
+# ---------- macOS ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+
+# ---------- IDE 配置（用户个人，勿入仓库）----------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.sublime-workspace
+*.sublime-project
+
+# ---------- 飞连 CLI 本地缓存 & 配置（含 Secret 绝不入库）----------
+# 注意：config.toml 可能被用户复制到项目根目录调试；务必排除
+config.toml
+config.local.toml
+*.local.toml
+~/.config/feilian/
+~/.cache/feilian/
+.cache/
+
+# ---------- 临时脚本 / 调试输出 ----------
+/tmp/
+*.tmp
+*.bak
+.configure_helper.sh
+.configure_helper.command
+fl_dev.json
+fl_sw.json
