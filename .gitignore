@@ -57,6 +57,8 @@ env/
 # ---------- IDE 配置（用户个人，勿入仓库）----------
 .vscode/
 .idea/
+# Trae 本机自动生成的插件状态（.trae/skills/ 下的 Skill 定义仍需入库，勿整目录忽略）
+.trae/installed-plugins.json
 *.swp
 *.swo
 *~

@@ -19,6 +19,7 @@ description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/
 - 终端安全：安全基线、病毒查杀、漏洞修复
 - 系统配置：角色、管理员、策略模板
 - 审批流 / 消息网关 / 软件库 等
+- 软件资产审计：**按软件名反查安装了该软件的设备+用户**（如"谁装了 codex / 某工具"）、软件安装统计、许可管理
 - 安全 Web 网关（SWG）：设备临时放行(bypass)、强制断连(disconnect)、网站过滤策略查询
 - 动态控制（dynamic）：后续开放的动态策略类接口
 
@@ -108,6 +109,30 @@ feilian swg url-filtering-strategy-list --all --output table
 feilian token --expires-in 14400
 # 强制刷新 token
 feilian token --refresh
+
+# ========== 软件资产反查：按软件名 → 设备 + 用户（三步法工作流） ==========
+# 场景：「谁装了 codex / 某某软件」「列出装了某客户端的设备」
+# 正向查询（已知设备查软件）用 device software-list --did；反向查询（已知软件查设备）走下面三步：
+
+# 第 1 步：按软件名模糊搜索，拿到软件 ID（sid）
+#   返回 items[]：id(sid) / software_name / bundle_id / publisher / os / installed_num(字符串)
+feilian software stat-list --name codex --all
+#   ⚠️ 同名干扰：一个关键字可能命中多个软件（如 codex 命中 CodexBar / Codex++ /
+#      @openai/codex / ChatGPT 桌面端内置 codex）。用 bundle_id + publisher 甄别官方包，
+#      并以 installed_num > 0 为准（installed_num 是字符串，比较时转 int）。
+
+# 第 2 步：用 sid 反查安装设备列表
+#   返回 {software_name, count, devices[]}；devices[] 每条含：
+#   did / device_name / serial_number / version / path / installed_time(Unix秒) /
+#   user(=用户 ou_xxx) / uninstalled_time(0=未卸载)
+feilian software stat-detail --sid 3640525 --all
+
+# 第 3 步：逐台补全设备 + 用户详情（机型/系统/在线状态/姓名/部门/出口IP）
+#   device search 返回的设备对象含 full_name / department_name / os / os_ver /
+#   brand / model / is_live(是否在线) / client_ip / client_ip_location
+feilian device search --did 685933ba0c2cc864ea5afcd472842f1a
+#   提示：installed_time / create_time 均为 Unix 秒，展示前用
+#   datetime.datetime.fromtimestamp(ts) 换算本地时间。
 ```
 
 #### B. 未封装/不确定？用 api 透传（兜底）
