@@ -14865,6 +14865,66 @@
    "request_example": "https://{endpoint}/api/open/v1/swg/url_filtering/strategy/list?limit=20&offset=0",
    "deprecated": false,
    "doc_id": "6a62d7aa1222100509042c31"
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "status-batch-update",
+   "name_cn": "批量更新设备状态（置失效）",
+   "path": "/api/open/v1/device/batch/status/update",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 – 批量删除终端设备】。将指定设备置为目标状态：0 失效、1 活跃、2 休眠。常用于设备去重/清理前将待删除设备置为失效。",
+   "params": [
+    {
+     "name": "dids",
+     "type": "string[]",
+     "required": true,
+     "desc": "设备 did 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "status",
+     "type": "integer",
+     "required": true,
+     "desc": "目标设备状态：0 失效、1 活跃、2 休眠",
+     "in": "body",
+     "level": 0
+    }
+   ],
+   "request_example": "https://{endpoint}/api/open/v1/device/batch/status/update\n\n{\n  \"dids\": [\"6a8dcb10b52905b3eb07ebd99068eb51\"],\n  \"status\": 0\n}",
+   "deprecated": false,
+   "doc_id": ""
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "invalid-batch-delete",
+   "name_cn": "批量清理失效设备",
+   "path": "/api/open/v1/device/batch/invalid/delete",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 – 批量删除终端设备】。清理指定 did 中处于 clean_range 状态范围的设备及其关联数据（分组、软件统计、软件分发、终端登记、补丁统计）。clean_range 为状态数组，[0] 表示清理失效设备。",
+   "params": [
+    {
+     "name": "dids",
+     "type": "string[]",
+     "required": true,
+     "desc": "设备 did 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "clean_range",
+     "type": "integer[]",
+     "required": true,
+     "desc": "设备状态清理范围（数组），[0] 失效、[1] 活跃、[2] 休眠",
+     "in": "body",
+     "level": 0
+    }
+   ],
+   "request_example": "https://{endpoint}/api/open/v1/device/batch/invalid/delete\n\n{\n  \"dids\": [\"6a8dcb10b52905b3eb07ebd99068eb51\"],\n  \"clean_range\": [0]\n}",
+   "deprecated": false,
+   "doc_id": ""
   }
  ]
 }

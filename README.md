@@ -1,14 +1,14 @@
 # feilian-cli · 飞连开放平台 CLI
 
-> 面向 IT 管理员的**飞连（SealSuite）开放平台命令行工具**。基于规格驱动的动态命令架构，将飞连 254 个开放 API 封装为统一的 CLI 子命令，配合环境变量 / 配置文件双模式鉴权、自动 token 刷新、分页聚合与 AI Agent 原生集成。
+> 面向 IT 管理员的**飞连（SealSuite）开放平台命令行工具**。基于规格驱动的动态命令架构，将飞连 256 个开放 API 封装为统一的 CLI 子命令，配合环境变量 / 配置文件双模式鉴权、自动 token 刷新、分页聚合与 AI Agent 原生集成。
 
 | 维度 | 值 |
 |---|---|
-| 📦 版本 | `0.1.0` |
+| 📦 版本 | `0.1.1` |
 | 🐍 Python | `>= 3.9`（3.9 / 3.10 / 3.11 / 3.12 均测试通过） |
 | 🧩 命令别名 | `feilian` 或 `fl` |
-| 📂 API 覆盖 | **18 个分类 · 254 个接口**（GET 111 · POST 143） |
-| ✅ 测试 | [![pytest 18/18](https://img.shields.io/badge/pytest-18%2F18-brightgreen)](tests/) `0.28s` |
+| 📂 API 覆盖 | **18 个分类 · 256 个接口**（GET 111 · POST 145） |
+| ✅ 测试 | [![pytest 23/23](https://img.shields.io/badge/pytest-23%2F23-brightgreen)](tests/) `0.21s` |
 | 🔐 Token 默认过期 | **最短 7200 秒（2 小时）**，可通过 `--expires-in` / 环境变量覆盖 |
 
 ---
@@ -93,7 +93,7 @@ access_key_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 ---
 
-## 🗂️ 命令分组（18 分类 · 254 接口）
+## 🗂️ 命令分组（18 分类 · 256 接口）
 
 18 个顶级分类对应 18 组 Click 子命令，接口数量与中文名对应关系如下：
 
@@ -103,7 +103,7 @@ access_key_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxx"
 | `ztna`     | 零信任接入 | **35** | | `admin`    | 管理员 | 10 |
 | `nac`      | 网络准入 | **28** | | `control`  | 终端管控 | 8 |
 | `app`      | 应用管理 | **24** | | `swg`      | **安全 Web 网关** | **7** ⭐ |
-| `device`   | 终端管理 | **24** | | `approval` | 审批 | 2 |
+| `device`   | 终端管理 | **26** | | `approval` | 审批 | 2 |
 | `security` | 终端安全 | 23 | | `auth`     | 身份认证 | 2 |
 | `system`   | 系统配置 | 23 | | `msg`      | 消息网关 | 2 |
 | `repo`     | 软件库 | 13 | | `it`       | IT 管理 | 1 |
@@ -203,6 +203,26 @@ feilian api get /api/open/v1/department/list -q parent_id=od_xxx -q limit=100
 echo '{"name":"新部门"}' | feilian api post /api/open/v1/department/create -d @-
 ```
 
+### 7. 🧹 设备去重（SN 重复清理 · v0.1.1 新增）
+
+同一序列号注册了多个 did（重复注册/重装客户端/克隆模板）时，一键保留最近活跃设备并清理其余：
+
+```bash
+# 1. 预览去重计划（默认不执行，安全）
+feilian device-dedup --dry-run
+
+# 2. 只处理指定 SN
+feilian device-dedup --sn <SERIAL> --dry-run
+
+# 3. 确认无误后执行（先批量置失效，再批量清理）
+feilian device-dedup --yes
+```
+
+- 判定规则：按设备状态（活跃 > 休眠 > 失效）+ 最近在线时间，每组保留 1 台；
+- 底层走两个原生接口：`device status-batch-update`（置失效）+ `device invalid-batch-delete`（清理，含分组/软件统计等关联数据）；
+- 均按 did 精确定位，克隆模板导致的 MAC/SN 相同设备也能逐台处理；
+- 删除不可逆，必须显式 `--yes` 才执行。
+
 ---
 
 ## 🧭 全局选项
@@ -235,7 +255,7 @@ echo '{"name":"新部门"}' | feilian api post /api/open/v1/department/create -d
 
 ## 🤖 AI Agent 集成（Trae / TraeWork）
 
-项目根目录下 `.trae/skills/feilian-cli/SKILL.md` 已包含 Agent 行为规范（含 254 接口覆盖描述、SWG 示例、环境变量说明）。
+项目根目录下 `.trae/skills/feilian-cli/SKILL.md` 已包含 Agent 行为规范（含 256 接口覆盖描述、SWG 示例、环境变量说明）。
 
 **在 Trae 中打开本项目后，直接用自然语言即可驱动 CLI**，例如：
 
@@ -277,7 +297,7 @@ echo '{"name":"新部门"}' | feilian api post /api/open/v1/department/create -d
 │   ├── client.py                       # httpx.Client 封装：统一错误 / 401 重试 / offset-limit 翻页（--all）
 │   ├── output.py                       # json / table / raw 三种输出格式 + Rich 渲染
 │   ├── registry.py                     # 规格驱动核心：读 apis.json → 动态构造 Click 命令树 + 参数校验 + search 索引
-│   └── spec/apis.json                  # ⭐ 254 接口规格（version=2026-08-25T09:38:27.327Z）
+│   └── spec/apis.json                  # ⭐ 256 接口规格（version=2026-08-25T09:38:27.327Z）
 └── tests/
     ├── test_auth.py      (5 case)  token 缓存 / 过期刷新 / 端点变更失效 / 强制刷新 / 鉴权失败
     ├── test_client.py    (5 case)  成功返回 / 业务错误 / 401 自动重试 / GET 翻页 / POST 翻页
@@ -314,9 +334,17 @@ echo '{"name":"新部门"}' | feilian api post /api/open/v1/department/create -d
 
 ---
 
-## 📝 Release Notes · `0.1.0`
+## 📝 Release Notes
 
-### 🎉 首次正式发布（2026-08-25）
+### 🎉 v0.1.1（2026-09-10）
+
+- 🧹 **新增 `device-dedup` 去重命令**：同一 SN 多 did 自动保留最近活跃一台，其余置失效并清理；默认仅预览，`--yes` 才执行。
+- 🆕 **新增 2 个终端管理接口**（254 → 256）：
+  - `device status-batch-update`：按 did 批量更新设备状态（置失效）；
+  - `device invalid-batch-delete`：批量清理失效设备及关联数据（`clean_range` 传 `[0]`）。
+- 🧪 **单测 18 → 23**：新增 `tests/test_dedup.py` 覆盖保留/删除选择规则（状态优先级 + 最近在线）。
+
+### 🎉 首次正式发布 · `0.1.0`
 
 - ✨ **基础框架落成**：规格驱动架构，从 apis.json 生成 254 条 Click 子命令，参数与文档保持一致。
 - 🆕 **新增 `swg` 安全 Web 网关分类**：7 条全新接口 — 临时放行(bypass)×3、强制断连(disconnect)×3、网站过滤策略×1。

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "feilian-cli"
-version = "0.1.0"
+version = "0.1.1"
 description = "飞连开放平台 OpenAPI 命令行工具（IT 管理员用）"
 readme = "README.md"
 requires-python = ">=3.9"

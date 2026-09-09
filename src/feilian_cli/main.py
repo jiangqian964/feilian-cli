@@ -6,7 +6,7 @@ import sys
 
 import click
 
-from . import __version__, auth, config, registry
+from . import __version__, auth, config, dedup, registry
 from .client import ApiError, FeilianClient
 from .config import ConfigError
 from .output import render
@@ -183,6 +183,7 @@ def search(keyword):
 
 
 registry.register_commands(cli)
+cli.add_command(dedup.dedup_command)
 
 
 if __name__ == "__main__":
