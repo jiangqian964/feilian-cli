@@ -1,13 +1,13 @@
 # feilian-cli · 飞连开放平台 CLI
 
-> 面向 IT 管理员的**飞连（SealSuite）开放平台命令行工具**。基于规格驱动的动态命令架构，将飞连 256 个开放 API 封装为统一的 CLI 子命令，配合环境变量 / 配置文件双模式鉴权、自动 token 刷新、分页聚合与 AI Agent 原生集成。
+> 面向 IT 管理员的**飞连（SealSuite）开放平台命令行工具**。基于规格驱动的动态命令架构，将飞连 334 个开放 API 封装为统一的 CLI 子命令，配合环境变量 / 配置文件双模式鉴权、自动 token 刷新、分页聚合与 AI Agent 原生集成。
 
 | 维度 | 值 |
 |---|---|
-| 📦 版本 | `0.1.1` |
+| 📦 版本 | `0.1.2` |
 | 🐍 Python | `>= 3.9`（3.9 / 3.10 / 3.11 / 3.12 均测试通过） |
 | 🧩 命令别名 | `feilian` 或 `fl` |
-| 📂 API 覆盖 | **18 个分类 · 256 个接口**（GET 111 · POST 145） |
+| 📂 API 覆盖 | **18 个分类 · 334 个接口**（GET 143 · POST 191） |
 | ✅ 测试 | [![pytest 23/23](https://img.shields.io/badge/pytest-23%2F23-brightgreen)](tests/) `0.21s` |
 | 🔐 Token 默认过期 | **最短 7200 秒（2 小时）**，可通过 `--expires-in` / 环境变量覆盖 |
 
@@ -93,19 +93,19 @@ access_key_secret = "xxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 ---
 
-## 🗂️ 命令分组（18 分类 · 256 接口）
+## 🗂️ 命令分组（18 分类 · 334 接口）
 
 18 个顶级分类对应 18 组 Click 子命令，接口数量与中文名对应关系如下：
 
 | Slug | 中文分类 | 接口数 | | Slug | 中文分类 | 接口数 |
 |---|---|---:|---|---|---|---:|
-| `org`      | 组织架构 | **40** | | `software` | 软件管理 | 11 |
-| `ztna`     | 零信任接入 | **35** | | `admin`    | 管理员 | 10 |
-| `nac`      | 网络准入 | **28** | | `control`  | 终端管控 | 8 |
-| `app`      | 应用管理 | **24** | | `swg`      | **安全 Web 网关** | **7** ⭐ |
-| `device`   | 终端管理 | **26** | | `approval` | 审批 | 2 |
-| `security` | 终端安全 | 23 | | `auth`     | 身份认证 | 2 |
-| `system`   | 系统配置 | 23 | | `msg`      | 消息网关 | 2 |
+| `org`      | 组织架构 | **41** | | `software` | 软件管理 | 19 |
+| `ztna`     | 零信任接入 | **67** | | `admin`    | 管理员 | 10 |
+| `nac`      | 网络准入 | **31** | | `control`  | 终端管控 | 8 |
+| `app`      | 应用管理 | **24** | | `swg`      | **安全 Web 网关** | **14** ⭐ |
+| `device`   | 终端管理 | **35** | | `approval` | 审批 | 2 |
+| `security` | 终端安全 | 27 | | `auth`     | 身份认证 | 2 |
+| `system`   | 系统配置 | 37 | | `msg`      | 消息网关 | 2 |
 | `repo`     | 软件库 | 13 | | `it`       | IT 管理 | 1 |
 | | | | | `mdm`      | MDM 管控 | 1 |
 | | | | | `dynamic`  | 动态控制 | 0（占位·下期开放） |
@@ -255,7 +255,7 @@ feilian device-dedup --yes
 
 ## 🤖 AI Agent 集成（Trae / TraeWork）
 
-项目根目录下 `.trae/skills/feilian-cli/SKILL.md` 已包含 Agent 行为规范（含 256 接口覆盖描述、SWG 示例、环境变量说明）。
+项目根目录下 `.trae/skills/feilian-cli/SKILL.md` 已包含 Agent 行为规范（含 334 接口覆盖描述、SWG 示例、环境变量说明）。
 
 **在 Trae 中打开本项目后，直接用自然语言即可驱动 CLI**，例如：
 
@@ -297,7 +297,7 @@ feilian device-dedup --yes
 │   ├── client.py                       # httpx.Client 封装：统一错误 / 401 重试 / offset-limit 翻页（--all）
 │   ├── output.py                       # json / table / raw 三种输出格式 + Rich 渲染
 │   ├── registry.py                     # 规格驱动核心：读 apis.json → 动态构造 Click 命令树 + 参数校验 + search 索引
-│   └── spec/apis.json                  # ⭐ 256 接口规格（version=2026-08-25T09:38:27.327Z）
+│   └── spec/apis.json                  # ⭐ 334 接口规格（version=2026-09-10T00:00:00.000Z）
 └── tests/
     ├── test_auth.py      (5 case)  token 缓存 / 过期刷新 / 端点变更失效 / 强制刷新 / 鉴权失败
     ├── test_client.py    (5 case)  成功返回 / 业务错误 / 401 自动重试 / GET 翻页 / POST 翻页
@@ -335,6 +335,20 @@ feilian device-dedup --yes
 ---
 
 ## 📝 Release Notes
+
+### 🎉 v0.1.2（2026-09-10）
+
+- 🆕 **新增 78 个接口**（256 → 334）：
+  - **零信任接入-代理访问管理（28 个）**：代理节点 / 代理应用 / 应用标签 / 引流策略 / ACL 策略 / 规则模板 / 进程规则 / 在线连接（`feilian ztna server-* / app-tag-* / application-* / traffic-policy-* / acl-policy-* / rule-template-list / process-rule-list / connection-list`）；
+  - **安全 Web 网关-网站过滤（7 个）**：策略详情 / 生效对象 / 状态 / 分类范围 / 优先级 / 搜索 / 删除（`feilian swg url-filtering-strategy-*`）；
+  - **终端管理-可信设备（9 个）**：状态更新 + 策略增删改查 / 启停 / 生效对象（`feilian device trusted-device-*`）；
+  - **软件管理（8 个）**：软件安装管控 / 进程运行管控策略（`feilian software install-control-* / process-control-*`）；
+  - **终端安全-外设管控（4 个）**：策略 + 生效对象（`feilian security dlp-peripheral-*`）；
+  - **网络准入-访客账号（3 个）**：创建 / 编辑 / 删除（`feilian nac wifi-guest-*`）；
+  - **零信任接入-访问资源 V2（4 个）**：`feilian ztna vpn-acl-resource-*-v2`；
+  - **系统配置（14 个）**：地址资源标签更新/删除、自定义分类域名、标签库资源标签、网络区域；
+  - **组织架构（1 个）**：获取用户增量更新列表（`feilian org user-incremental-list`）。
+- 🧩 新增 `scripts/gen_new_apis.py`：把文档站抓取的新接口 JSON 一键合入 `apis.json`（幂等，按 path 去重）。
 
 ### 🎉 v0.1.1（2026-09-10）
 

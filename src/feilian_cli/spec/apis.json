@@ -1,5 +1,5 @@
 {
- "version": "2026-08-25T09:38:27.327Z",
+ "version": "2026-09-10T00:00:00.000Z",
  "base_path_prefix": "/api/open/",
  "categories": [
   {
@@ -14925,6 +14925,3208 @@
    "request_example": "https://{endpoint}/api/open/v1/device/batch/invalid/delete\n\n{\n  \"dids\": [\"6a8dcb10b52905b3eb07ebd99068eb51\"],\n  \"clean_range\": [0]\n}",
    "deprecated": false,
    "doc_id": ""
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "server-tag-list",
+   "name_cn": "获取代理节点标签列表",
+   "path": "/api/open/v1/ztna/server/tag/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理- 获取节点标签列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "language",
+     "type": "string",
+     "required": false,
+     "desc": "语言，中文：zh-CN，英文：en-US",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "server-list",
+   "name_cn": "获取代理节点列表",
+   "path": "/api/open/v1/ztna/server/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取节点列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "节点名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "tag_id",
+     "type": "string",
+     "required": false,
+     "desc": "节点标签 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "language",
+     "type": "string",
+     "required": false,
+     "desc": "语言，中文：zh-CN，英文：en-US",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "server-get",
+   "name_cn": "获取代理节点详情",
+   "path": "/api/open/v1/ztna/server/get",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取节点详情】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "节点 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "language",
+     "type": "string",
+     "required": false,
+     "desc": "语言，中文：zh-CN，英文：en-US",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "app-tag-create",
+   "name_cn": "创建代理应用标签",
+   "path": "/api/open/v1/ztna/app_tag/create",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 创建应用标签】。",
+   "params": [
+    {
+     "name": "name_i18n",
+     "type": "object",
+     "required": true,
+     "desc": "标签多语言名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "application_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的应用 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "app-tag-update",
+   "name_cn": "更新代理应用标签",
+   "path": "/api/open/v1/ztna/app_tag/update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 更新应用标签】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name_i18n",
+     "type": "object",
+     "required": true,
+     "desc": "标签多语言名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "application_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的应用 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "app-tag-list",
+   "name_cn": "获取代理应用标签列表",
+   "path": "/api/open/v1/ztna/app_tag/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取应用标签列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "app-tag-get",
+   "name_cn": "获取代理应用标签详情",
+   "path": "/api/open/v1/ztna/app_tag/get",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取应用标签详情】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "app-tag-delete",
+   "name_cn": "删除代理应用标签",
+   "path": "/api/open/v1/ztna/app_tag/delete",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 删除应用标签】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "application-create",
+   "name_cn": "创建代理应用",
+   "path": "/api/open/v1/ztna/application/create",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 创建应用】。",
+   "params": [
+    {
+     "name": "name_i18n",
+     "type": "object",
+     "required": true,
+     "desc": "应用多语言名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "description",
+     "type": "string",
+     "required": false,
+     "desc": "应用描述",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "ignore_conflict",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否忽略地址冲突，默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "addrs",
+     "type": "object[]",
+     "required": false,
+     "desc": "应用地址列表，每项包含 addrs、ports、protocol、addr_type",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "addr_groups",
+     "type": "object",
+     "required": false,
+     "desc": "应用地址分组配置",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "all_servers",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否关联全部节点，为 true 时忽略 server_ids 和 server_tag_ids",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "server_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的节点 ID 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "server_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的节点标签 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "application-update",
+   "name_cn": "更新代理应用",
+   "path": "/api/open/v1/ztna/application/update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 更新应用】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "应用 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name_i18n",
+     "type": "object",
+     "required": true,
+     "desc": "应用多语言名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "description",
+     "type": "string",
+     "required": false,
+     "desc": "应用描述",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "ignore_conflict",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否忽略地址冲突，默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "addrs",
+     "type": "object[]",
+     "required": false,
+     "desc": "应用地址列表，每项包含 addrs、ports、protocol、addr_type",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "addr_groups",
+     "type": "object",
+     "required": false,
+     "desc": "应用地址分组配置",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "all_servers",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否关联全部节点，为 true 时忽略 server_ids 和 server_tag_ids",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "server_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的节点 ID 列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "server_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "关联的节点标签 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "application-list",
+   "name_cn": "获取代理应用列表",
+   "path": "/api/open/v1/ztna/application/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取应用列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "应用名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "addr",
+     "type": "string",
+     "required": false,
+     "desc": "地址，IP 或域名，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "application-get",
+   "name_cn": "获取代理应用详情",
+   "path": "/api/open/v1/ztna/application/get",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取应用详情】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "应用 ID",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "application-delete",
+   "name_cn": "删除代理应用",
+   "path": "/api/open/v1/ztna/application/delete",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 删除应用】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "应用 ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-create",
+   "name_cn": "创建引流策略",
+   "path": "/api/open/v1/ztna/traffic_policy/create",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 创建引流策略】。",
+   "params": [
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，0-100，数值越大优先级越高",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": true,
+     "desc": "策略动作，1: 代理访问 2: 直连",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "allow_all",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否包含全部应用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "network_area_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用网络区域",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "network_area_config",
+     "type": "object",
+     "required": false,
+     "desc": "网络区域配置，network_area_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用进程控制规则",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "进程控制规则 ID 列表，process_rule_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "permission_scope",
+     "type": "object",
+     "required": true,
+     "desc": "生效范围，包含部门、角色、用户、设备等维度",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-list",
+   "name_cn": "获取引流策略列表",
+   "path": "/api/open/v1/ztna/traffic_policy/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取引流策略列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": false,
+     "desc": "策略动作，1: 代理访问 2: 直连",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用，true: 启用 false: 关闭",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "addr",
+     "type": "string",
+     "required": false,
+     "desc": "地址，IP 或域名，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-get",
+   "name_cn": "获取引流策略详情",
+   "path": "/api/open/v1/ztna/traffic_policy/get",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取引流策略详情】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-update",
+   "name_cn": "更新引流策略",
+   "path": "/api/open/v1/ztna/traffic_policy/update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 更新引流策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，0-100，数值越大优先级越高",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": true,
+     "desc": "策略动作，1: 代理访问 2: 直连",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "allow_all",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否包含全部应用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "network_area_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用网络区域",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "network_area_config",
+     "type": "object",
+     "required": false,
+     "desc": "网络区域配置，network_area_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用进程控制规则",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "进程控制规则 ID 列表，process_rule_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "permission_scope",
+     "type": "object",
+     "required": true,
+     "desc": "生效范围，包含部门、角色、用户、设备等维度",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-quick-update",
+   "name_cn": "快速更新引流策略",
+   "path": "/api/open/v1/ztna/traffic_policy/quick_update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 快速更新引流策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，数值越大优先级越高，0 到 100",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "traffic-policy-delete",
+   "name_cn": "删除引流策略",
+   "path": "/api/open/v1/ztna/traffic_policy/delete",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 删除引流策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-create",
+   "name_cn": "创建 ACL 策略",
+   "path": "/api/open/v1/ztna/acl_policy/create",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 创建ACL策略】。",
+   "params": [
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用，默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，0-100，数值越大优先级越高",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": true,
+     "desc": "策略动作，1: 可访问 2: 不可访问",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "valid_days",
+     "type": "integer",
+     "required": false,
+     "desc": "生效时长（天），0 代表永久有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "allow_all",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否包含全部应用资源",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用进程控制规则",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "进程控制规则 ID 列表，process_rule_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "rule_template_id",
+     "type": "string",
+     "required": false,
+     "desc": "规则模板 ID，0 代表不绑定规则模版",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "permission_scope",
+     "type": "object",
+     "required": true,
+     "desc": "生效范围，包含部门、角色、用户、设备等维度",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-update",
+   "name_cn": "更新 ACL 策略",
+   "path": "/api/open/v1/ztna/acl_policy/update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 更新ACL策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用，默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，0-100，数值越大优先级越高",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": true,
+     "desc": "策略动作，1: 可访问 2: 不可访问",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "valid_days",
+     "type": "integer",
+     "required": false,
+     "desc": "生效时长（天），0 代表永久有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "allow_all",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否包含全部应用资源",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "app_tag_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "应用标签 ID 列表，allow_all 为 false 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用进程控制规则",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "process_rule_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "进程控制规则 ID 列表，process_rule_enable 为 true 时必填",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "rule_template_id",
+     "type": "string",
+     "required": false,
+     "desc": "规则模板 ID，0 代表不绑定规则模版",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "permission_scope",
+     "type": "object",
+     "required": true,
+     "desc": "生效范围，包含部门、角色、用户、设备等维度",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-list",
+   "name_cn": "获取 ACL 策略列表",
+   "path": "/api/open/v1/ztna/acl_policy/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取ACL策略列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否生效",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "action",
+     "type": "integer",
+     "required": false,
+     "desc": "策略动作，1: 可访问 2: 不可访问",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "addr",
+     "type": "string",
+     "required": false,
+     "desc": "地址，IP 或域名，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-get",
+   "name_cn": "获取 ACL 策略详情",
+   "path": "/api/open/v1/ztna/acl_policy/get",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取ACL策略详情】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-quick-update",
+   "name_cn": "快速更新 ACL策略",
+   "path": "/api/open/v1/ztna/acl_policy/quick_update",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 快速更新ACL策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enabled",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "优先级，数值越大优先级越高",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "acl-policy-delete",
+   "name_cn": "删除 ACL 策略",
+   "path": "/api/open/v1/ztna/acl_policy/delete",
+   "method": "POST",
+   "desc": "需要接口权限【代理访问管理 - 删除ACL策略】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "string",
+     "required": true,
+     "desc": "策略 ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "rule-template-list",
+   "name_cn": "获取规则模板列表",
+   "path": "/api/open/v1/ztna/rule_template/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取规则模板列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "模板名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "process-rule-list",
+   "name_cn": "获取进程规则列表",
+   "path": "/api/open/v1/ztna/process_rule/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取进程规则列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "规则名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "os",
+     "type": "string",
+     "required": false,
+     "desc": "操作系统类型",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "connection-list",
+   "name_cn": "获取在线连接列表",
+   "path": "/api/open/v1/ztna/connection/list",
+   "method": "GET",
+   "desc": "需要接口权限【代理访问管理 - 获取在线连接列表】。",
+   "params": [
+    {
+     "name": "start_time",
+     "type": "integer",
+     "required": false,
+     "desc": "开始时间戳",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "end_time",
+     "type": "integer",
+     "required": false,
+     "desc": "结束时间戳",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "device_id",
+     "type": "string",
+     "required": false,
+     "desc": "设备 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_id",
+     "type": "string",
+     "required": false,
+     "desc": "用户 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "internal_ip",
+     "type": "string",
+     "required": false,
+     "desc": "内网 IP，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_ip",
+     "type": "string",
+     "required": false,
+     "desc": "公网 IP，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 10",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-detail",
+   "name_cn": "获取网站过滤策略细节",
+   "path": "/api/open/v1/swg/url_filtering/strategy/detail",
+   "method": "GET",
+   "desc": "需要接口权限 【SWG管理 - 获取网站过滤策略细节】。 根据策略 Key 获取该策略详细讯息",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-update-scope",
+   "name_cn": "更新网站过滤策略生效对象",
+   "path": "/api/open/v1/swg/url_filtering/strategy/update/scope",
+   "method": "POST",
+   "desc": "需要接口权限 【SWG管理 - 更新网站过滤策略生效对象】",
+   "params": []
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-update-status",
+   "name_cn": "更新网站过滤策略状态",
+   "path": "/api/open/v1/swg/url_filtering/strategy/update/status",
+   "method": "POST",
+   "desc": "需要接口权限 【SWG管理 - 更新网站过滤策略状态】",
+   "params": []
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-update-categories",
+   "name_cn": "更新网站过滤策略网站分类范围",
+   "path": "/api/open/v1/swg/url_filtering/strategy/update/categories",
+   "method": "POST",
+   "desc": "需要接口权限 【SWG管理 - 更新网站过滤策略网站分类范围】",
+   "params": []
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-update-priority",
+   "name_cn": "更新网站过滤策略优先级",
+   "path": "/api/open/v1/swg/url_filtering/strategy/update/priority",
+   "method": "POST",
+   "desc": "需要接口权限 【SWG管理 - 更新网站过滤策略优先级】",
+   "params": []
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-search",
+   "name_cn": "搜索网站过滤策略",
+   "path": "/api/open/v1/swg/url_filtering/strategy/search",
+   "method": "GET",
+   "desc": "需要接口权限 【SWG管理 - 搜索网站过滤策略】.",
+   "params": []
+  },
+  {
+   "category": "swg",
+   "category_cn": "安全 Web 网关",
+   "name": "url-filtering-strategy-delete",
+   "name_cn": "删除网站过滤策略",
+   "path": "/api/open/v1/swg/url_filtering/strategy/delete",
+   "method": "POST",
+   "desc": "需要接口权限 【SWG管理 - 删除网站过滤策略】.",
+   "params": []
+  },
+  {
+   "category": "org",
+   "category_cn": "组织架构",
+   "name": "user-incremental-list",
+   "name_cn": "获取用户增量更新列表",
+   "path": "/api/open/v1/user/incremental/list",
+   "method": "GET",
+   "desc": "需要接口权限【组织架构 - 获取成员信息】，以及对应用户的权限。无权访问用户会被忽略。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "last_user_id",
+     "type": "string",
+     "required": false,
+     "desc": "查询起始用户 OpenID，结果内容不包含该 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "start_time",
+     "type": "integer",
+     "required": false,
+     "desc": "开始时间，Unix 时间戳(单位秒)，结果数据变更时间大于该时间",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "end_time",
+     "type": "integer",
+     "required": false,
+     "desc": "自定义用户 ID 列表，最大长度不超过 50，与其他查询参数不能同时为空",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "attr_keys",
+     "type": "string",
+     "required": false,
+     "desc": "扩展属性 key 列表，多个属性名称用英文逗号分隔，查询结果中会包含指定 key 的扩展属性信息",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-status-update",
+   "name_cn": "更新设备可信状态",
+   "path": "/api/open/v1/device/trusted_device/status_update",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 修改设备可信状态】",
+   "params": [
+    {
+     "name": "did",
+     "type": "string",
+     "required": true,
+     "desc": "设备ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "trusted_status",
+     "type": "integer",
+     "required": true,
+     "desc": "更新的可信状态，1-置为可信，0-置为不可信",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-list",
+   "name_cn": "获取可信设备管理策略",
+   "path": "/api/open/v1/device/trusted_device/policy/list",
+   "method": "GET",
+   "desc": "需要接口权限【终端管理 - 查看可信设备配置】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "string",
+     "required": false,
+     "desc": "生效状态 true:生效 false:未生效",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_id",
+     "type": "string",
+     "required": false,
+     "desc": "用户id，格式为: ou_xxx",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "department_id",
+     "type": "string",
+     "required": false,
+     "desc": "部门id，格式为: od_xxx",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "role_id",
+     "type": "string",
+     "required": false,
+     "desc": "角色id，格式为: or_xxx",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "order_by",
+     "type": "string",
+     "required": false,
+     "desc": "排序方式 priority:优先级 created_at:策略创建时间 updated_at:策略更新时间，默认updated_at",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-get",
+   "name_cn": "获取可信设备管理策略详情",
+   "path": "/api/open/v1/device/trusted_device/policy/get",
+   "method": "GET",
+   "desc": "需要接口权限【终端管理 - 查看可信设备配置】。",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略key",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-create",
+   "name_cn": "创建可信设备管理策略",
+   "path": "/api/open/v1/device/trusted_device/policy/create",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "boolean",
+     "required": true,
+     "desc": "是否启用策略，true:启用 false:不启用， 默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": true,
+     "desc": "策略优先级，范围为 0 ~ 100，默认值 0",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "quota_config",
+     "type": "object",
+     "required": true,
+     "desc": "额度配置详情",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "scope",
+     "type": "object",
+     "required": false,
+     "desc": "生效范围",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-update",
+   "name_cn": "修改可信设备管理策略",
+   "path": "/api/open/v1/device/trusted_device/policy/update",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用策略，true:启用 false:不启用， 默认 false",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "priority",
+     "type": "integer",
+     "required": false,
+     "desc": "策略优先级，范围为 0 ~ 100，默认值 0",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "quota_config",
+     "type": "object",
+     "required": false,
+     "desc": "额度配置详情",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "scope",
+     "type": "object",
+     "required": false,
+     "desc": "生效范围",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-delete",
+   "name_cn": "删除可信设备管理策略",
+   "path": "/api/open/v1/device/trusted_device/policy/delete",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略key",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-enable",
+   "name_cn": "启动或禁用可信设备管理策略",
+   "path": "/api/open/v1/device/trusted_device/policy/enable",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "boolean",
+     "required": false,
+     "desc": "是否启用策略，true:启用 false:不启用， 默认 false",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-target-add",
+   "name_cn": "新增可信设备管理策略生效对象",
+   "path": "/api/open/v1/device/trusted_device/policy/target/add",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "用户 ID 列表，格式为: ou_xxx , 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "depart_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 ID 列表，格式为: od_xxx， 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 ID 列表，格式为: or_xxx, 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "device",
+   "category_cn": "终端管理",
+   "name": "trusted-device-policy-target-delete",
+   "name_cn": "删除可信设备管理策略生效对象",
+   "path": "/api/open/v1/device/trusted_device/policy/target/delete",
+   "method": "POST",
+   "desc": "需要接口权限【终端管理 - 编辑可信设备配置】",
+   "params": [
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "用户 ID 列表，格式为: ou_xxx , 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "depart_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 ID 列表，格式为: od_xxx， 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 ID 列表，格式为: or_xxx, 生效对象类型为 \"user\" 时有效",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "install-control-strategy-list",
+   "name_cn": "获取软件安装管控策略列表",
+   "path": "/api/open/v1/software/install_control/strategy/list",
+   "method": "GET",
+   "desc": "需要接口权限【软件管理 - 获取软件安装策略管控】。",
+   "params": [
+    {
+     "name": "strategy_type",
+     "type": "integer",
+     "required": false,
+     "desc": "策略类型，0: 全部, 1: 禁止安装 2:允许安装,默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "bool",
+     "required": false,
+     "desc": "是否启用",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "strategy_name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称，支持模糊匹配",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "install-control-strategy-get",
+   "name_cn": "获取软件安装管控策略详情",
+   "path": "/api/open/v1/software/install_control/strategy/get",
+   "method": "GET",
+   "desc": "需要接口权限【软件管理 - 获取软件安装策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": false,
+     "desc": "策略 Key（与 user_id 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_id",
+     "type": "string",
+     "required": false,
+     "desc": "员工 OpenID，格式为：ou_xxx （与 strategy_key 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "device_id",
+     "type": "string",
+     "required": false,
+     "desc": "设备 did（仅当传 user_id 时允许，用于补全设备维度匹配）",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "install-control-scope-target-add",
+   "name_cn": "新增软件安装管控策略中的生效对象",
+   "path": "/api/open/v1/software/install_control/scope/target/add",
+   "method": "POST",
+   "desc": "需要接口权限【软件管理 - 编辑软件安装策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "install-control-scope-target-delete",
+   "name_cn": "移除软件安装管控策略中的生效对象",
+   "path": "/api/open/v1/software/install_control/scope/target/delete",
+   "method": "POST",
+   "desc": "需要接口权限【软件管理 - 编辑软件安装策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "process-control-strategy-list",
+   "name_cn": "获取进程运行管控策略列表",
+   "path": "/api/open/v1/software/process_control/strategy/list",
+   "method": "GET",
+   "desc": "需要接口权限【软件管理 - 获取软件进程运行策略管控】。",
+   "params": [
+    {
+     "name": "strategy_name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称，支持模糊查询",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "bool",
+     "required": false,
+     "desc": "是否启用",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "process-control-strategy-get",
+   "name_cn": "获取进程运行管控策略详情",
+   "path": "/api/open/v1/software/process_control/strategy/get",
+   "method": "GET",
+   "desc": "需要接口权限【软件管理 - 获取软件进程运行策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": false,
+     "desc": "策略 Key（与 user_id 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_id",
+     "type": "string",
+     "required": false,
+     "desc": "员工 OpenID，格式为：ou_xxx （与 strategy_key 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "device_id",
+     "type": "string",
+     "required": false,
+     "desc": "设备 did（仅当传 user_id 时允许，用于补全设备维度匹配）",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "process-control-scope-target-add",
+   "name_cn": "新增进程运行管控策略中的生效对象",
+   "path": "/api/open/v1/software/process_control/scope/target/add",
+   "method": "POST",
+   "desc": "需要接口权限【软件管理 - 编辑软件进程运行策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "software",
+   "category_cn": "软件管理",
+   "name": "process-control-scope-target-delete",
+   "name_cn": "移除进程运行管控策略中的生效对象",
+   "path": "/api/open/v1/software/process_control/scope/target/delete",
+   "method": "POST",
+   "desc": "需要接口权限【软件管理 - 编辑软件进程运行策略管控】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "security",
+   "category_cn": "终端安全",
+   "name": "dlp-peripheral-strategy-list",
+   "name_cn": "获取外设管控策略列表",
+   "path": "/api/open/v1/dlp/peripheral/strategy/list",
+   "method": "GET",
+   "desc": "需要接口权限【数据安全 - 获取外设管控策略】。",
+   "params": [
+    {
+     "name": "strategy_name",
+     "type": "string",
+     "required": false,
+     "desc": "策略名称，支持模糊匹配",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "enable",
+     "type": "bool",
+     "required": false,
+     "desc": "是否启用",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "security",
+   "category_cn": "终端安全",
+   "name": "dlp-peripheral-strategy-get",
+   "name_cn": "获取外设管控策略详情",
+   "path": "/api/open/v1/dlp/peripheral/strategy/get",
+   "method": "GET",
+   "desc": "需要接口权限【数据安全 - 获取外设管控策略】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": false,
+     "desc": "策略 Key（与 user_id 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "user_id",
+     "type": "string",
+     "required": false,
+     "desc": "员工 OpenID，格式为：ou_xxx （与 strategy_key 参数二选一）",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "device_id",
+     "type": "string",
+     "required": false,
+     "desc": "设备 did（仅当传 user_id 时允许，用于补全设备维度匹配）",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "security",
+   "category_cn": "终端安全",
+   "name": "dlp-peripheral-scope-target-add",
+   "name_cn": "新增外设管控策略中的生效对象",
+   "path": "/api/open/v1/dlp/peripheral/scope/target/add",
+   "method": "POST",
+   "desc": "需要接口权限【数据安全 - 编辑外设管控策略】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "security",
+   "category_cn": "终端安全",
+   "name": "dlp-peripheral-scope-target-delete",
+   "name_cn": "移除外设管控策略中的生效对象",
+   "path": "/api/open/v1/dlp/peripheral/scope/target/delete",
+   "method": "POST",
+   "desc": "需要接口权限【数据安全 - 编辑外设管控策略】。",
+   "params": [
+    {
+     "name": "strategy_key",
+     "type": "string",
+     "required": true,
+     "desc": "策略 Key",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "user_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "员工 OpenID 列表，格式为：ou_xxx ，单次最大数量为 100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "department_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "部门 OpenID 列表，格式为: od_xxx,单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "role_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "角色 OpenID 列表，格式为：or_xxx, 单次最大数量为100，参数属于人员维度，与设备维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_ids",
+     "type": "string[]",
+     "required": false,
+     "desc": "设备 did 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "device_group_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "设备分组 ID 列表，单次最大数量为 100，参数属于设备维度，与人员维度参数不能同时传递",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "nac",
+   "category_cn": "网络准入",
+   "name": "wifi-guest-create",
+   "name_cn": "批量创建访客账号",
+   "path": "/api/open/v1/wifi/guest/create",
+   "method": "POST",
+   "desc": "需要接口权限【WiFi管理 – 申请访客WiFi账号】。",
+   "params": [
+    {
+     "name": "accounts",
+     "type": "struct",
+     "required": true,
+     "desc": "账号列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "uid",
+     "type": "string",
+     "required": false,
+     "desc": "申请人用户 id",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "max_client_num",
+     "type": "integer",
+     "required": false,
+     "desc": "账号下的最大客户端数",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "valid_start_time",
+     "type": "integer",
+     "required": true,
+     "desc": "账号有效开始时间即来访时间， Unix时间戳（单位秒）",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "valid_end_time",
+     "type": "integer",
+     "required": true,
+     "desc": "账号过期时间，Unix时间戳，单位秒",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "reason",
+     "type": "integer",
+     "required": true,
+     "desc": "到访原因，1:会议 2:面试 3:客户接待 4:亲友接待 5:维修施工 6:其他，默认 6",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "nac",
+   "category_cn": "网络准入",
+   "name": "wifi-guest-edit",
+   "name_cn": "编辑访客账号",
+   "path": "/api/open/v1/wifi/guest/edit",
+   "method": "POST",
+   "desc": "需要接口权限【WiFi管理 – 编辑访客WiFi账号】。",
+   "params": [
+    {
+     "name": "account_id",
+     "type": "integer",
+     "required": true,
+     "desc": "账号ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "password",
+     "type": "string",
+     "required": false,
+     "desc": "密码，长度 6-15，字母数字组合",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "max_client_num",
+     "type": "integer",
+     "required": false,
+     "desc": "账号下的最大客户端数",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "activated_at",
+     "type": "integer",
+     "required": false,
+     "desc": "账号有效开始时间即来访时间， Unix时间戳（单位秒）",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "expired_at",
+     "type": "integer",
+     "required": false,
+     "desc": "账号过期时间，Unix时间戳，单位秒",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "reason",
+     "type": "integer",
+     "required": false,
+     "desc": "到访原因，1:会议 2:面试 3:客户接待 4:亲友接待 5:维修施工 6:其他，默认 6",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "remark",
+     "type": "string",
+     "required": false,
+     "desc": "备注",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "nac",
+   "category_cn": "网络准入",
+   "name": "wifi-guest-delete",
+   "name_cn": "删除访客账号",
+   "path": "/api/open/v1/wifi/guest/delete",
+   "method": "POST",
+   "desc": "需要接口权限【WiFi管理 – 删除访客WiFi账号】。",
+   "params": [
+    {
+     "name": "account_id",
+     "type": "integer",
+     "required": true,
+     "desc": "账号ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "vpn-acl-resource-create-v2",
+   "name_cn": "创建访问资源 V2 版本",
+   "path": "/api/open/v2/vpn/acl/resource/create",
+   "method": "POST",
+   "desc": "需要接口权限【VPN管理 - 编辑资源与策略信息】。",
+   "params": [
+    {
+     "name": "type",
+     "type": "string",
+     "required": true,
+     "desc": "资源类型，ip:IP资源，domain:域名资源",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "key",
+     "type": "string",
+     "required": true,
+     "desc": "资源名称，仅支持大小写字母（a-z，A-Z）、数字（0-9）、下划线（_）、中划线（-）、句点（.）、中文字符,不能重复",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "protocols",
+     "type": "string[]",
+     "required": true,
+     "desc": "资源协议 ,tcp|udp|icmp|http|https，大小写敏感",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "matches",
+     "type": "object[]",
+     "required": true,
+     "desc": "端口精细匹配列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "标签 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "vpn-acl-resource-list-v2",
+   "name_cn": "获取访问资源列表 V2 版本",
+   "path": "/api/open/v2/vpn/acl/resource/list",
+   "method": "GET",
+   "desc": "需要接口权限【VPN管理 - 获取资源与策略信息】。",
+   "params": [
+    {
+     "name": "type",
+     "type": "string",
+     "required": false,
+     "desc": "资源类型,ip:IP 资源; domain:域名资源",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "key",
+     "type": "string",
+     "required": false,
+     "desc": "资源名称，支持模糊查询",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "protocols",
+     "type": "string",
+     "required": false,
+     "desc": "资源协议 ,tcp|udp|icmp|http|https，多个值以逗号分隔，大小写敏感",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "use_type",
+     "type": "integer",
+     "required": false,
+     "desc": "使用状态,1:使用中(已关联访问策略)；2:未使用(未关联访问策略)",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "tag_ids",
+     "type": "string",
+     "required": false,
+     "desc": "标签 ID，多个值以逗号分割",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "vpn-acl-resource-get-v2",
+   "name_cn": "获取访问资源详情 V2 版本",
+   "path": "/api/open/v2/vpn/acl/resource/get",
+   "method": "GET",
+   "desc": "需要接口权限【VPN管理 - 获取资源与策略信息】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "integer",
+     "required": true,
+     "desc": "资源 ID",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "ztna",
+   "category_cn": "零信任接入",
+   "name": "vpn-acl-resource-update-v2",
+   "name_cn": "更新访问资源 V2 版本",
+   "path": "/api/open/v2/vpn/acl/resource/update",
+   "method": "POST",
+   "desc": "需要接口权限【VPN管理 - 编辑资源与策略信息】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "integer",
+     "required": true,
+     "desc": "资源 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "key",
+     "type": "string",
+     "required": false,
+     "desc": "资源名称，仅支持大小写字母（a-z，A-Z）、数字（0-9）、下划线（_）、中划线（-）、句点（.）、中文字符,不能重复",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "protocols",
+     "type": "string[]",
+     "required": false,
+     "desc": "资源协议 ,tcp|udp|icmp|http|https，大小写敏感",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "matches",
+     "type": "object[]",
+     "required": false,
+     "desc": "端口精细匹配列表",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_ids",
+     "type": "integer[]",
+     "required": false,
+     "desc": "标签 ID 列表",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "addr-management-tag-update",
+   "name_cn": "编辑地址资源标签",
+   "path": "/api/open/v1/addr/management/tag/update",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 编辑地址资源】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "integer",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "标签名称",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "addr-management-tag-delete",
+   "name_cn": "删除地址资源标签",
+   "path": "/api/open/v1/addr/management/tag/delete",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 删除地址资源】。",
+   "params": [
+    {
+     "name": "ids",
+     "type": "integer[]",
+     "required": true,
+     "desc": "tag ID 列表，支持批量删除，单次上限50个",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-url-category-custom-domains-:action",
+   "name_cn": "添加或删除自定义分类的域名",
+   "path": "/api/open/v1/resource/url/category/custom/domains/:action",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 创建（或更新）自定义网站分类库】。",
+   "params": []
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-types",
+   "name_cn": "获取标签库资源标签类型列表",
+   "path": "/api/open/v1/resource/tag/types",
+   "method": "GET",
+   "desc": "需要接口权限【资源管理 - 获取资源标签详情】。",
+   "params": []
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-create",
+   "name_cn": "新增标签库中资源标签",
+   "path": "/api/open/v1/resource/tag/create",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 创建（或更新）资源标签】。",
+   "params": [
+    {
+     "name": "tag_type",
+     "type": "string",
+     "required": true,
+     "desc": "标签类型",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_name",
+     "type": "string",
+     "required": true,
+     "desc": "标签名称，最长为 30 字符, 相同标签类型下，标签名称唯一",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_value",
+     "type": "string",
+     "required": true,
+     "desc": "自定义标签值，最长为 30 字符，全局唯一",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-update",
+   "name_cn": "更新标签库中资源标签",
+   "path": "/api/open/v1/resource/tag/update",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 创建（或更新）资源标签】。",
+   "params": [
+    {
+     "name": "tag_id",
+     "type": "integer",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_name",
+     "type": "string",
+     "required": false,
+     "desc": "标签名称，最长为 30 字符, 相同标签类型下，标签名称唯一",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "tag_value",
+     "type": "string",
+     "required": false,
+     "desc": "自定义标签值，最长为 30 字符，全局唯一",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-delete",
+   "name_cn": "删除标签库中资源标签",
+   "path": "/api/open/v1/resource/tag/delete",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 删除资源标签】。",
+   "params": [
+    {
+     "name": "tag_id",
+     "type": "integer",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-list",
+   "name_cn": "获取标签库中资源标签列表",
+   "path": "/api/open/v1/resource/tag/list",
+   "method": "GET",
+   "desc": "需要接口权限【资源管理 - 获取资源标签详情】。",
+   "params": [
+    {
+     "name": "tag_type",
+     "type": "string",
+     "required": false,
+     "desc": "标签类型",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "query",
+     "type": "string",
+     "required": false,
+     "desc": "标签名称或自定义标签值模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-tag-associated-resource-list",
+   "name_cn": "获取标签库中资源标签关联资源列表",
+   "path": "/api/open/v1/resource/tag/associated_resource/list",
+   "method": "GET",
+   "desc": "需要接口权限【资源管理 - 获取资源标签关联资源】。",
+   "params": [
+    {
+     "name": "tag_id",
+     "type": "integer",
+     "required": true,
+     "desc": "标签 ID",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "resource_name",
+     "type": "string",
+     "required": false,
+     "desc": "资源名称模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "resource_desc",
+     "type": "string",
+     "required": false,
+     "desc": "资源描述模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "network-area-list",
+   "name_cn": "获取网络区域列表",
+   "path": "/api/open/v1/network_area/list",
+   "method": "GET",
+   "desc": "需要接口权限【资源管理 - 获取网络区域列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "网络区域名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-network-area-list",
+   "name_cn": "查看网络区域列表",
+   "path": "/api/open/v1/resource/network_area/list",
+   "method": "GET",
+   "desc": "需要接口权限【资源管理 - 查看网络区域列表】。",
+   "params": [
+    {
+     "name": "limit",
+     "type": "integer",
+     "required": false,
+     "desc": "单页数据量，默认值 20，最大值 200",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "offset",
+     "type": "integer",
+     "required": false,
+     "desc": "分页数据偏移量，默认值 0",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": false,
+     "desc": "网络区域名称，支持模糊搜索",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "dns",
+     "type": "string",
+     "required": false,
+     "desc": "dns",
+     "in": "query",
+     "level": 0
+    },
+    {
+     "name": "ip",
+     "type": "string",
+     "required": false,
+     "desc": "公网 / 内网 IP",
+     "in": "query",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-network-area-create",
+   "name_cn": "创建网络区域",
+   "path": "/api/open/v1/resource/network_area/create",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 创建网络区域】。",
+   "params": [
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "名称 ，不能为空值",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "description",
+     "type": "string",
+     "required": true,
+     "desc": "描述，不能为空值",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "rule_group",
+     "type": "object",
+     "required": true,
+     "desc": "匹配条件组",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-network-area-update",
+   "name_cn": "修改网络区域",
+   "path": "/api/open/v1/resource/network_area/update",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 修改网络区域】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "int",
+     "required": true,
+     "desc": "id",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "required": true,
+     "desc": "名称 ，不能为空值",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "description",
+     "type": "string",
+     "required": true,
+     "desc": "描述，不能为空值",
+     "in": "body",
+     "level": 0
+    },
+    {
+     "name": "rule_group",
+     "type": "object",
+     "required": true,
+     "desc": "匹配条件组",
+     "in": "body",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "category": "system",
+   "category_cn": "系统配置",
+   "name": "resource-network-area-delete",
+   "name_cn": "删除网络区域",
+   "path": "/api/open/v1/resource/network_area/delete",
+   "method": "POST",
+   "desc": "需要接口权限【资源管理 - 删除网络区域】。",
+   "params": [
+    {
+     "name": "id",
+     "type": "int",
+     "required": true,
+     "desc": "要删除的网络区域ID",
+     "in": "body",
+     "level": 0
+    }
+   ]
   }
  ]
 }
