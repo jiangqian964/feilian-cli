@@ -5,7 +5,7 @@ description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/
 
 # Feilian CLI Skill
 
-使用飞连开放平台命令行工具（feilian / fl）执行 IT 管理操作，覆盖 18 个分类、254 个接口。
+使用飞连开放平台命令行工具（feilian / fl）执行 IT 管理操作，覆盖 18 个分类、334 个接口。
 
 ## 何时使用
 

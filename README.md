@@ -4,7 +4,7 @@
 
 | 维度 | 值 |
 |---|---|
-| 📦 版本 | `0.1.2` |
+| 📦 版本 | `0.1.3` |
 | 🐍 Python | `>= 3.9`（3.9 / 3.10 / 3.11 / 3.12 均测试通过） |
 | 🧩 命令别名 | `feilian` 或 `fl` |
 | 📂 API 覆盖 | **18 个分类 · 334 个接口**（GET 143 · POST 191） |
@@ -223,6 +223,26 @@ feilian device-dedup --yes
 - 均按 did 精确定位，克隆模板导致的 MAC/SN 相同设备也能逐台处理；
 - 删除不可逆，必须显式 `--yes` 才执行。
 
+### 8. 📤 导出在线设备清单（SN / MAC / 计算机名 / 邮箱 → CSV · v0.1.3 新增）
+
+拉取指定系统（如 Windows）在线设备，导出 `device_map.csv`（设备 SN、MAC、计算机名、当前登录员工邮箱）：
+
+```bash
+# 一键导出（默认：状态=活跃、系统=windows、输出 device_map.csv）
+python3 scripts/export_device_map.py
+
+# 自定义：休眠设备 / macOS / 指定输出路径
+python3 scripts/export_device_map.py --status 2 --client-os mac --out mac_map.csv
+
+# 复用已保存的 device search 结果（跳过重新拉取）
+python3 scripts/export_device_map.py --input /tmp/win.json --out device_map.csv
+```
+
+- 数据链路：`device search`（按状态+OS 筛选，`--all` 全量）→ `org user-get`（按 user_id 关联登录员工邮箱，去重缓存）→ CSV；
+- 表头：`did, serial_number, mac_addrs, device_name, user_id, email`；多网卡 MAC 以 `;` 合并；
+- CSV 为 UTF-8 带 BOM，Excel 直接打开中文不乱码；
+- 个别账号未配置邮箱（手机号注册/测试号）`email` 留空，属正常。
+
 ---
 
 ## 🧭 全局选项
@@ -335,6 +355,11 @@ feilian device-dedup --yes
 ---
 
 ## 📝 Release Notes
+
+### 🎉 v0.1.3（2026-09-11）
+
+- 🧰 新增 `scripts/export_device_map.py`：一键导出在线设备清单 CSV（SN / MAC / 计算机名 / 登录员工邮箱），支持按状态、操作系统筛选；配套新增 README 场景「导出在线设备清单」。
+- 🧩 新增 Agent Skill `feilian-device-map`（`workspace/.user_skills/`）：固化"拉设备 → 关联邮箱 → 导出 CSV"工作流与接口踩坑。
 
 ### 🎉 v0.1.2（2026-09-10）
 
