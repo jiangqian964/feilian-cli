@@ -4,7 +4,7 @@
 
 | 维度 | 值 |
 |---|---|
-| 📦 版本 | `0.1.3` |
+| 📦 版本 | `0.1.4` |
 | 🐍 Python | `>= 3.9`（3.9 / 3.10 / 3.11 / 3.12 均测试通过） |
 | 🧩 命令别名 | `feilian` 或 `fl` |
 | 📂 API 覆盖 | **18 个分类 · 334 个接口**（GET 143 · POST 191） |
@@ -243,6 +243,24 @@ python3 scripts/export_device_map.py --input /tmp/win.json --out device_map.csv
 - CSV 为 UTF-8 带 BOM，Excel 直接打开中文不乱码；
 - 个别账号未配置邮箱（手机号注册/测试号）`email` 留空，属正常。
 
+### 9. 📦 导出软件库 × 终端安装映射（软件资产审计 · v0.1.4 新增）
+
+导出软件库全部软件，并逐个软件输出安装了它的终端（设备名/SN/版本/用户/安装时间）：
+
+```bash
+# 一键导出 → software_library.csv + software_install_map.csv
+python3 scripts/export_software_map.py
+
+# 指定输出目录 / 复用已保存的接口结果（跳过重拉）
+python3 scripts/export_software_map.py --out-dir /path \
+  --input-goods goods.json --input-stats stats.json
+```
+
+- 数据链路：`repo appstore-goods-list`（软件库全部商品）→ `software stat-list`（全量终端上报软件统计，名称桥接 stat sid）→ `software stat-detail`（逐 sid 拉安装终端，did+版本去重）→ 两个 CSV；
+- `software_library.csv`：`goods_id, name, category`；`software_install_map.csv`：`software_name, device_name, serial_number, version, user_id, installed_time, did`；
+- 软件库与统计是两套 ID（goods id vs stat sid），按软件名匹配；同名多 OS/版本自动合并；未匹配（测试软件/安装包）单独列出；
+- 实测：软件库 47 个软件、17 个匹配到终端统计、530 行安装映射。
+
 ---
 
 ## 🧭 全局选项
@@ -355,6 +373,11 @@ python3 scripts/export_device_map.py --input /tmp/win.json --out device_map.csv
 ---
 
 ## 📝 Release Notes
+
+### 🎉 v0.1.4（2026-09-18）
+
+- 🧰 新增 `scripts/export_software_map.py`：一键导出软件库全部软件 + 每个软件的安装终端（设备名/SN/版本/用户/安装时间）为两个 CSV；README 新增场景「导出软件库 × 终端安装映射」。
+- 🧩 新增 Agent Skill `feilian-software-map`（`workspace/.user_skills/`）：固化"软件库 → 名称桥接 stat sid → 逐软件拉终端"工作流与两套 ID 体系的踩坑。
 
 ### 🎉 v0.1.3（2026-09-11）
 
