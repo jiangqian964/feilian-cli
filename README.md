@@ -377,7 +377,7 @@ python3 scripts/export_software_map.py --out-dir /path \
 ### 🎉 v0.1.5（2026-09-21）
 
 - 🧩 扩展 Agent Skill `feilian-software-map`（`workspace/.user_skills/`）：新增**软件商品运维**能力章节——添加/上架安装包（Windows/Mac 多架构、source=2 网络源）、授权范围管理（全员 = 根部门）、官方安装包核实方法；`references/api.md` 补充 `goods-detail` / `goods-package-add` / `package-remove` / `package-status` / `goods-update`（scope 语义）实测记录。
-- 💡 固化的关键踩坑：CLI 布尔值（`auto_shelf`/`shelf_status`）必须走 `--data` JSON，命令行传 `true` 会被当字符串导致 `code=40000`；`scope.user` 三数组全空 ≠ 全员（被忽略），`depart_ids` 传根部门才等于全员且为整体替换语义；Mac 通用 dmg 需分别挂 x86 与 arm64 两个槽。
+- 💡 固化的关键踩坑：CLI 布尔值（`auto_shelf`/`shelf_status`）必须走 `--data` JSON，命令行传 `true` 会被当字符串导致 `code=40000`；`scope.user` 三数组全空 ≠ 全员（被忽略），`depart_ids` 传根部门才等于全员且为整体替换语义；**Mac 必须双槽挂载**（飞连 `package_infos` 只认 mac_arm64/mac_x86 两个槽，cpu=0 通用包在 UI 无槽位，官方通用 dmg 同链接挂 cpu=1/cpu=2 两个包是正常且唯一可行）。
 
 ### 🎉 v0.1.4（2026-09-18）
 
