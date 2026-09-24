@@ -1,6 +1,6 @@
 ---
 name: "feilian-cli"
-description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/ZTNA/NAC/应用/SWG/动态控制等254个接口）。Invoke when 涉及飞连(SealSuite)IT管理操作，如查用户、管设备、零信任配置、审批、SWG临时放行、强制断连、网站过滤策略等。"
+description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/ZTNA/NAC/应用/SWG/动态控制等334个接口）。Invoke when 涉及飞连(SealSuite)IT管理操作，如查用户、管设备、零信任配置、审批、SWG临时放行、强制断连、网站过滤策略、系统版本审计、软件资产反查等。"
 ---
 
 # Feilian CLI Skill
@@ -20,6 +20,7 @@ description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/
 - 系统配置：角色、管理员、策略模板
 - 审批流 / 消息网关 / 软件库 等
 - 软件资产审计：**按软件名反查安装了该软件的设备+用户**（如"谁装了 codex / 某工具"）、软件安装统计、许可管理
+- 系统版本审计：**低于某 OS 版本的设备清单 + 归属人**（如"低于 macOS 26 的设备"、"还在 Windows 10 的机器"）、升级推动、合规盘点
 - 安全 Web 网关（SWG）：设备临时放行(bypass)、强制断连(disconnect)、网站过滤策略查询
 - 动态控制（dynamic）：后续开放的动态策略类接口
 
@@ -133,6 +134,27 @@ feilian software stat-detail --sid 3640525 --all
 feilian device search --did 685933ba0c2cc864ea5afcd472842f1a
 #   提示：installed_time / create_time 均为 Unix 秒，展示前用
 #   datetime.datetime.fromtimestamp(ts) 换算本地时间。
+
+# ========== 系统版本审计：低于某版本的设备 + 归属人（两步法工作流） ==========
+# 场景：「低于 macOS 26 的设备有哪些？归属人是谁？」「跑一下还在 Windows 10 的机器」
+# 适用于 OS 升级推动、合规审计、老旧设备盘点。
+
+# 第 1 步：拉全量指定 OS 的设备，本地按 os_ver 主版本号筛选
+#   --client-os: mac / windows / linux
+#   返回 devices[] 每条含：did / device_name / os / os_ver / model /
+#   brand / user_id(ou_xxx) / full_name / department_name / device_status
+#   device_status: 0=失效 1=活跃 2=休眠
+feilian device search --client-os mac --all > /tmp/mac_devices.json
+#   筛选逻辑：os_ver 形如 "26.2" / "15.7.7"，按主版本号比较
+#   低于 26 = int(os_ver.split('.')[0]) < 26
+
+# 第 2 步：对去重后的 user_id 批量查 org user-get，补全邮箱和完整部门路径
+#   返回字段：email / department_path / full_name / mobile / departments[]
+#   ⚠️ device search 自带 department_name 是短路径，org user-get 的
+#      department_path 才是完整层级（如 飞连SA演示环境/corplink/产解/东区产解）
+feilian org user-get --id ou_xxx
+#   汇总输出：OS版本 / 设备名 / 型号 / 序列号 / 状态 / 归属人 / 账号 / 邮箱 / 部门
+#   导出 CSV 用 utf-8-sig 编码，Excel 直接打开中文不乱码。
 ```
 
 #### B. 未封装/不确定？用 api 透传（兜底）
