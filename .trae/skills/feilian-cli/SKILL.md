@@ -1,6 +1,6 @@
 ---
 name: "feilian-cli"
-description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/ZTNA/NAC/应用/SWG/动态控制等334个接口）。Invoke when 涉及飞连(SealSuite)IT管理操作，如查用户、管设备、零信任配置、审批、SWG临时放行、强制断连、网站过滤策略、系统版本审计、软件资产反查等。"
+description: "通过 feilian CLI 调用飞连开放平台接口（组织/设备/ZTNA/NAC/应用/SWG/动态控制/安全EDLP等334个接口）。Invoke when 涉及飞连(SealSuite)IT管理操作，如查用户、管设备、零信任配置、审批、SWG临时放行、强制断连、网站过滤策略、系统版本审计、软件资产反查、DLP告警日志巡检等。"
 ---
 
 # Feilian CLI Skill
@@ -156,6 +156,30 @@ feilian org user-get --id ou_xxx
 #   汇总输出：OS版本 / 设备名 / 型号 / 序列号 / 状态 / 归属人 / 账号 / 邮箱 / 部门
 #   导出 CSV 用 utf-8-sig 编码，Excel 直接打开中文不乱码。
 ```
+
+#### DLP 数据防泄漏告警日志巡检（v0.1.6 新增）
+
+场景：「定期看 DLP 告警」「哪些 DLP 告警是误报」「按文件特征过滤明显误报」。
+
+```bash
+# 1) 拉告警日志（GET /api/open/v1/security/edlp/events/list，CLI: security edlp-events-list）
+feilian security edlp-events-list --start-time 1739000000 --end-time 1739086400 --all
+#   参数：start_time/end_time(Unix秒) / limit / offset / id / did / device_os /
+#   file_type / status；接口单次最多 200 条，必须翻页（--all 自动聚合）
+```
+
+**返回结构 `data.items[]` 关键字段**：
+- `file_info`：`name / path / type / size / md5`（⚠️ Git Push 等无文件外发事件的 file_info 是**全空字段 dict**，不是 None）
+- `leak_way`：`app_name`（外发渠道应用名，如 微信/飞书/豆包）/ `app_type`
+- `event_type` / `action_desc`（动作描述）
+- `user_info`（触发用户）、`more_info`（Git Push 的 remote_url/process_name 等）
+
+**误报判定核心经验（只依据文件路径/文件名/文件格式，不读取文件内容）**：
+- 明显误报类别：聊天/AI 助手本地库（微信/企微/QQ/钉钉/飞书/豆包本地数据目录）、数据库引擎文件（.db/.sqlite/.ldb/.wal ≤5MB 判误报，大文件转可疑）、系统/程序目录内部文件（Windows 目录、/System、~/Library 缓存配置）、浏览器本地数据、开发构建产物、临时/缓存/锁文件、程序二进制/字体；
+- ⚠️ **渠道 ≠ 误报**：`leak_way.app_name` 是微信/飞书，只说明经该渠道外发，**不能据此判误报**——用户通过微信发自己的文件是真实泄漏；只有文件**所在路径**命中聊天软件本地数据目录才算误报；
+- ⚠️ **macOS 云盘不算系统目录**：`~/Library/CloudStorage/坚果云...`、`~/Library/Mobile Documents`（iCloud）是用户真实文件，**不得**因路径含 `Library` 判系统目录；系统目录只匹配根级 `/System`、根 `/Library` 及 `~/Library` 下 caches/logs/preferences/webkit 等程序内部子目录；
+- 分类输出：明显误报（fp_high）/ 可疑待人工（fp_suspect）/ 正常告警（normal）/ 非文件外发（no_file）；
+- 可复用脚本：`scripts/dlp_false_positive.py --days N --output-dir <dir>`，复用 `FeilianClient.request + config.load_profile` 编程调用（比子进程更稳），报告输出 Markdown + JSON；配每日 cron 定时巡检。
 
 #### B. 未封装/不确定？用 api 透传（兜底）
 

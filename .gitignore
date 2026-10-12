@@ -85,3 +85,6 @@ config.local.toml
 .configure_helper.command
 fl_dev.json
 fl_sw.json
+
+# 每日生成的 DLP 巡检报告（由 scripts/dlp_false_positive.py 产出）
+reports/

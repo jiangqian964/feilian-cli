@@ -263,6 +263,26 @@ python3 scripts/export_software_map.py --out-dir /path \
 
 ---
 
+### 10. 📊 DLP 告警日志误报巡检（v0.1.6 新增）
+
+拉取数据防泄漏告警日志，按文件路径 / 文件名 / 文件格式特征识别明显误报（聊天软件本地库、数据库引擎文件、系统目录内部文件、浏览器缓存、临时文件、程序二进制等），输出 Markdown 摘要 + 结构化 JSON：
+
+```bash
+# 抓最近 1 天（默认），报告输出到 reports/
+python3 scripts/dlp_false_positive.py --days 1
+
+# 抓最近 7 天，自定义输出目录
+python3 scripts/dlp_false_positive.py --days 7 --output-dir /path/to/reports
+```
+
+- 数据链路：`security edlp-events-list`（`GET /api/open/v1/security/edlp/events/list`，自动翻页）→ 规则引擎分类；
+- 判定分类：`明显误报`（fp_high）/ `可疑待人工`（fp_suspect）/ `正常告警` / `非文件外发`（剪贴板/代码仓库等无文件特征）；
+- 判定只依据文件路径、文件名、文件格式与外发应用，不读取文件内容；「通过微信/飞书等渠道外发」的用户文件**不会**被误判为误报；
+- 产出：`reports/dlp_false_positive_YYYY-MM-DD.md`（可读报告）+ `.json`（结构化数据，含每条告警的判定依据）；
+- 支持每日定时巡检：已内置「飞连DLP误报每日巡检」定时任务（每天 08:30 运行，结果写入 reports/ 并汇报摘要）。
+
+---
+
 ## 🧭 全局选项
 
 所有命令（含分类子命令、api 透传、token、search）共享：
@@ -373,6 +393,12 @@ python3 scripts/export_software_map.py --out-dir /path \
 ---
 
 ## 📝 Release Notes
+
+### 🎉 v0.1.6（2026-10-12）
+
+- 📊 新增 `scripts/dlp_false_positive.py`：DLP 告警日志误报巡检。拉取 `security edlp-events-list`（`GET /api/open/v1/security/edlp/events/list`）自动翻页，按文件路径/文件名/文件格式特征（聊天软件本地库、数据库引擎文件、系统目录、浏览器缓存、临时/缓存文件、程序二进制等）判定明显误报，输出 `reports/dlp_false_positive_YYYY-MM-DD.md` + `.json`；
+- 🧠 误报规则要点：只按文件所在位置（程序内部目录）判定，不把「通过微信/飞书等渠道外发」的用户文件误判为误报；macOS `~/Library/CloudStorage`、`Mobile Documents` 等用户云盘文件不判误报；
+- ⏰ 内置每日定时巡检「飞连DLP误报每日巡检」（每天 08:30 运行，抓最近 24 小时，报告写入 `reports/` 并汇报摘要）。
 
 ### 🎉 v0.1.5（2026-09-21）
 
