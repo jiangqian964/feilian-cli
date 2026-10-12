@@ -19,6 +19,8 @@ DLP 告警日志误报巡检脚本
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 import json
 import re
 import sys
@@ -382,6 +384,28 @@ def render_markdown(report: Dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
+def render_csv(report: Dict[str, Any]) -> str:
+    """误报明细 CSV（仅明显误报），UTF-8 BOM 便于 Excel 直接打开。
+
+    列：日志ID / 告警时间 / 用户 / 外发应用 / 文件名 / 文件路径 /
+        误报类别 / 判定为误报的原因说明
+    """
+    buf = io.StringIO()
+    w = csv.writer(buf)
+    w.writerow([
+        "日志ID", "告警时间", "用户", "外发应用", "文件名", "文件路径",
+        "误报类别", "判定为误报的原因说明",
+    ])
+    for x in report["items"]:
+        if x["verdict"] != "fp_high":
+            continue
+        w.writerow([
+            x["event_id"], x["event_time"], x["user"], x["app"],
+            x["file_name"], x["file_path"], x["category"], x["reason"],
+        ])
+    return "\ufeff" + buf.getvalue()  # UTF-8 BOM
+
+
 # ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
@@ -393,6 +417,8 @@ def main() -> int:
     ap.add_argument("--output-dir", default=str(PROJECT_ROOT / "reports"),
                     help="报告输出目录（默认 <项目>/reports）")
     ap.add_argument("--json-only", action="store_true", help="仅输出 JSON 不打印摘要")
+    ap.add_argument("--emit-csv", action="store_true",
+                    help="额外输出误报明细 CSV（明显误报行：日志ID + 原因说明等）")
     args = ap.parse_args()
 
     now = int(time.time())
@@ -423,6 +449,11 @@ def main() -> int:
     md_path.write_text(render_markdown(report), encoding="utf-8")
     json_path.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8")
 
+    csv_path = None
+    if args.emit_csv:
+        csv_path = out_dir / f"dlp_false_positive_{date_tag}.csv"
+        csv_path.write_text(render_csv(report), encoding="utf-8")
+
     if args.json_only:
         print(json.dumps(report, ensure_ascii=False))
     else:
@@ -432,6 +463,8 @@ def main() -> int:
               f"可疑 {s['fp_suspect']} ｜ 正常 {s['normal']} ｜ 非文件外发 {s['no_file']}")
         print(f"  Markdown: {md_path}")
         print(f"  JSON    : {json_path}")
+        if csv_path:
+            print(f"  CSV     : {csv_path}（{s['fp_high']} 行误报明细）")
     return 0
 
 

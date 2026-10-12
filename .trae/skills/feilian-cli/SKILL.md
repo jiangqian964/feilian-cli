@@ -179,7 +179,8 @@ feilian security edlp-events-list --start-time 1739000000 --end-time 1739086400 
 - ⚠️ **渠道 ≠ 误报**：`leak_way.app_name` 是微信/飞书，只说明经该渠道外发，**不能据此判误报**——用户通过微信发自己的文件是真实泄漏；只有文件**所在路径**命中聊天软件本地数据目录才算误报；
 - ⚠️ **macOS 云盘不算系统目录**：`~/Library/CloudStorage/坚果云...`、`~/Library/Mobile Documents`（iCloud）是用户真实文件，**不得**因路径含 `Library` 判系统目录；系统目录只匹配根级 `/System`、根 `/Library` 及 `~/Library` 下 caches/logs/preferences/webkit 等程序内部子目录；
 - 分类输出：明显误报（fp_high）/ 可疑待人工（fp_suspect）/ 正常告警（normal）/ 非文件外发（no_file）；
-- 可复用脚本：`scripts/dlp_false_positive.py --days N --output-dir <dir>`，复用 `FeilianClient.request + config.load_profile` 编程调用（比子进程更稳），报告输出 Markdown + JSON；配每日 cron 定时巡检。
+- 可复用脚本：`scripts/dlp_false_positive.py --days N --output-dir <dir>`，复用 `FeilianClient.request + config.load_profile` 编程调用（比子进程更稳），报告输出 Markdown + JSON，加 `--emit-csv` 额外输出**误报明细 CSV**；配每日 cron 定时巡检；
+- 📄 **误报明细 CSV 输出经验（v0.1.7）**：`--emit-csv` 生成 `dlp_false_positive_YYYY-MM-DD.csv`，仅含明显误报行；列 = 日志ID / 告警时间 / 用户 / 外发应用 / 文件名 / 文件路径 / 误报类别 / 判定为误报的原因说明（`event_id` + `reason` 直接取自结构化 JSON，无需重新判定）；编码必须 UTF-8 BOM（`\ufeff` 前缀）便于 Excel 直接打开中文；交付前用 sheet skill 的 `excel_csv_verify.py --expect-rows N --expect-headers '["...","..."]'` 门禁校验（注意 `--expect-rows` 只计数据行、不含表头；`--expect-headers` 要传 JSON 数组）。
 
 #### B. 未封装/不确定？用 api 透传（兜底）
 

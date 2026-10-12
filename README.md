@@ -263,9 +263,9 @@ python3 scripts/export_software_map.py --out-dir /path \
 
 ---
 
-### 10. 📊 DLP 告警日志误报巡检（v0.1.6 新增）
+### 10. 📊 DLP 告警日志误报巡检（v0.1.6 新增 · v0.1.7 支持 CSV）
 
-拉取数据防泄漏告警日志，按文件路径 / 文件名 / 文件格式特征识别明显误报（聊天软件本地库、数据库引擎文件、系统目录内部文件、浏览器缓存、临时文件、程序二进制等），输出 Markdown 摘要 + 结构化 JSON：
+拉取数据防泄漏告警日志，按文件路径 / 文件名 / 文件格式特征识别明显误报（聊天软件本地库、数据库引擎文件、系统目录内部文件、浏览器缓存、临时文件、程序二进制等），输出 Markdown 摘要 + 结构化 JSON（+ 可选误报明细 CSV）：
 
 ```bash
 # 抓最近 1 天（默认），报告输出到 reports/
@@ -273,12 +273,15 @@ python3 scripts/dlp_false_positive.py --days 1
 
 # 抓最近 7 天，自定义输出目录
 python3 scripts/dlp_false_positive.py --days 7 --output-dir /path/to/reports
+
+# 额外输出误报明细 CSV（明显误报行：日志ID / 时间 / 用户 / 应用 / 文件 / 类别 / 原因说明）
+python3 scripts/dlp_false_positive.py --days 7 --emit-csv
 ```
 
 - 数据链路：`security edlp-events-list`（`GET /api/open/v1/security/edlp/events/list`，自动翻页）→ 规则引擎分类；
 - 判定分类：`明显误报`（fp_high）/ `可疑待人工`（fp_suspect）/ `正常告警` / `非文件外发`（剪贴板/代码仓库等无文件特征）；
 - 判定只依据文件路径、文件名、文件格式与外发应用，不读取文件内容；「通过微信/飞书等渠道外发」的用户文件**不会**被误判为误报；
-- 产出：`reports/dlp_false_positive_YYYY-MM-DD.md`（可读报告）+ `.json`（结构化数据，含每条告警的判定依据）；
+- 产出：`reports/dlp_false_positive_YYYY-MM-DD.md`（可读报告）+ `.json`（结构化数据，含每条告警的判定依据）+ `--emit-csv` 时的 `.csv`（UTF-8 BOM，Excel 可直接打开）；
 - 支持每日定时巡检：已内置「飞连DLP误报每日巡检」定时任务（每天 08:30 运行，结果写入 reports/ 并汇报摘要）。
 
 ---
@@ -393,6 +396,12 @@ python3 scripts/dlp_false_positive.py --days 7 --output-dir /path/to/reports
 ---
 
 ## 📝 Release Notes
+
+### 🎉 v0.1.7（2026-10-12）
+
+- 📄 `scripts/dlp_false_positive.py` 新增 `--emit-csv`：输出**误报明细 CSV**（仅明显误报行），列为日志ID / 告警时间 / 用户 / 外发应用 / 文件名 / 文件路径 / 误报类别 / 判定为误报的原因说明；UTF-8 BOM 编码，Excel 直接打开不乱码；
+- 🧠 Skill（`.trae/skills/feilian-cli`）DLP 章节补充 CSV 输出经验：`event_id`/`reason` 直接取自结构化 JSON、CSV 交付前用 `excel_csv_verify.py` 门禁校验（`--expect-rows` 不含表头、`--expect-headers` 传 JSON 数组）；
+- ✅ 实测：30 天数据 `--emit-csv` 输出 35 行误报明细，与人工抽取结果完全一致。
 
 ### 🎉 v0.1.6（2026-10-12）
 
